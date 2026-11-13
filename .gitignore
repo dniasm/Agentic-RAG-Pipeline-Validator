@@ -1,0 +1,31 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# runtime data (results are worth keeping: remove the runs/ line to commit them)
+data/qdrant/
+data/state/
+data/runs/
+data_smoke/
+
+# corpus inputs (third-party documents)
+data/corpus/*
+!data/corpus/.gitkeep
+
+frontend/node_modules/
+frontend/dist/
+
+# full source PDFs the corpus was cut from
+downloads/
+
+# secrets: any env file except the template
+.env.*
+!.env.example
+
+# logs, local backups, downloaded binaries
+data/logs/
+*.log
+backups/
+tools/

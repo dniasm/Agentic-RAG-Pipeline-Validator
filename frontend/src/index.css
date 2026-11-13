@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Style: achromatic ledger (light). The chrome holds no colour: ink, greys and one near-black primary.
+   The one hue (--hue) marks where an answer came from: citations, the source line, the documents share. */
+:root {
+  --ground: #f8f8f8;
+  --surface: #ffffff;
+  --raised: #eeeeee;
+  --active: #e9e9e9;
+  --border: #e6e6e6;
+  --rule: #f0f0f0;
+  --control: #d4d4d4;
+  --text: #0a0a0a;
+  --text-2: #3d3d3d;          /* secondary text that still reads as content (notices, chat titles) */
+  --muted: #6b6b6b;
+  --primary: #141414;          /* the one near-black action */
+  --primary-hover: #2b2b2b;
+  --on-primary: #ffffff;
+  --danger-hover: #fff5f4;
+  --hue: #1d5fbf;              /* provenance: citations, "From your documents", the documents share */
+  --positive: #2e7d32;
+  --negative: #c4242a;
+  --warning: #92400e;
+  --notice-border: #fde68a;
+  --pill-positive-bg: #dcfae5; --pill-positive-ink: #04250e;
+  --pill-negative-bg: #ffedea; --pill-negative-ink: #831c1e;
+  --pill-warning-bg: #fffbeb; --pill-warning-ink: #92400e;
+  --pill-neutral-bg: #eeeeee; --pill-neutral-ink: #3d3d3d;
+  --avatar-bg: #e3ebf7; --avatar-ink: #163d75;
+  /* chart neutrals, darkest to lightest: the series that are not the hue */
+  --chart-ink: #141414; --chart-2: #8a8a8a; --chart-3: #c4c4c4; --chart-4: #e2e2e2; --chart-5: #d4d4d4;
+  --selection: #dbe6f6;
+  --scroll-thumb: #d6d6d6; --scroll-thumb-hover: #b5b5b5;
+  --sidebar-width: 256px;
+  --t-hover: 120ms;
+  --t-press: 90ms;
+  color-scheme: light;
+}
+
+/* Dark: true neutral blacks (no navy or slate), elevation by lightness, two greys that read apart,
+   the primary inverted to white, and the hue lifted so text in it keeps 4.5:1 on the surfaces. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #000000;
+    --surface: #111111;
+    --raised: #1f1f1f;
+    --active: #262626;
+    --border: #242424;
+    --rule: #1a1a1a;
+    --control: #3d3d3d;
+    --text: #f2f2f2;
+    --text-2: #d0d0d0;
+    --muted: #a3a3a3;
+    --primary: #f2f2f2;
+    --primary-hover: #d9d9d9;
+    --on-primary: #0a0a0a;
+    --danger-hover: #2a1416;
+    --hue: #6aa5f5;
+    --positive: #3fc07a;
+    --negative: #f0717f;
+    --warning: #f5b454;
+    --notice-border: #5c4513;
+    --pill-positive-bg: #172a1d; --pill-positive-ink: #3fc07a;
+    --pill-negative-bg: #2c1a20; --pill-negative-ink: #f0717f;
+    --pill-warning-bg: #2b2210; --pill-warning-ink: #f5b454;
+    --pill-neutral-bg: #262626; --pill-neutral-ink: #d0d0d0;
+    --avatar-bg: #18273d; --avatar-ink: #a9c8f5;
+    --chart-ink: #f2f2f2; --chart-2: #8f8f8f; --chart-3: #5c5c5c; --chart-4: #383838; --chart-5: #4a4a4a;
+    --selection: #1f3a63;
+    --scroll-thumb: #333333; --scroll-thumb-hover: #4d4d4d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #000000;
+  --surface: #111111;
+  --raised: #1f1f1f;
+  --active: #262626;
+  --border: #242424;
+  --rule: #1a1a1a;
+  --control: #3d3d3d;
+  --text: #f2f2f2;
+  --text-2: #d0d0d0;
+  --muted: #a3a3a3;
+  --primary: #f2f2f2;
+  --primary-hover: #d9d9d9;
+  --on-primary: #0a0a0a;
+  --danger-hover: #2a1416;
+  --hue: #6aa5f5;
+  --positive: #3fc07a;
+  --negative: #f0717f;
+  --warning: #f5b454;
+  --notice-border: #5c4513;
+  --pill-positive-bg: #172a1d; --pill-positive-ink: #3fc07a;
+  --pill-negative-bg: #2c1a20; --pill-negative-ink: #f0717f;
+  --pill-warning-bg: #2b2210; --pill-warning-ink: #f5b454;
+  --pill-neutral-bg: #262626; --pill-neutral-ink: #d0d0d0;
+  --avatar-bg: #18273d; --avatar-ink: #a9c8f5;
+  --chart-ink: #f2f2f2; --chart-2: #8f8f8f; --chart-3: #5c5c5c; --chart-4: #383838; --chart-5: #4a4a4a;
+  --selection: #1f3a63;
+  --scroll-thumb: #333333; --scroll-thumb-hover: #4d4d4d;
+  color-scheme: dark;
+}
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: Geist, Inter, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+  }
+  button, input, textarea, select { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 4px; }
+  ::selection { background: var(--selection); }
+
+  /* Scrollbars: thin, grey, on the ground's tone, so long chats and lists don't show the OS's heavy bar. */
+  * { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) transparent; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 999px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--scroll-thumb-hover); border: 3px solid transparent; background-clip: content-box; }
+}
+
+@layer components {
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* Buttons: one near-black primary per screen, a white secondary with a border, text actions. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 h-9 px-3 rounded-control text-body font-medium select-none;
+    transition: background-color var(--t-hover) ease, transform var(--t-press) ease, color var(--t-hover) ease;
+  }
+  .btn:active:not(:disabled) { transform: translateY(1px); }
+  .btn:disabled { cursor: not-allowed; opacity: 0.55; }
+  .btn-primary { @apply btn bg-primary text-[color:var(--on-primary)] hover:bg-[var(--primary-hover)]; }
+  .btn-secondary { @apply btn bg-surface text-ink border border-control hover:bg-raised; }
+  .btn-ghost { @apply btn text-ink hover:bg-raised; }
+  .btn-danger { @apply btn bg-surface text-negative border border-control hover:bg-[var(--danger-hover)]; }
+  .link-action { @apply inline-flex items-center gap-1 text-body font-medium text-ink underline-offset-4 hover:underline; }
+
+  .panel { @apply bg-surface border border-line rounded-card; }
+
+  .pill { @apply inline-flex flex-none items-center gap-1.5 h-[22px] px-2 rounded-full text-small font-medium whitespace-nowrap; }
+  .pill-neutral { @apply pill; background: var(--pill-neutral-bg); color: var(--pill-neutral-ink); }
+  .pill-positive { @apply pill; background: var(--pill-positive-bg); color: var(--pill-positive-ink); }
+  .pill-negative { @apply pill; background: var(--pill-negative-bg); color: var(--pill-negative-ink); }
+  .pill-warning { @apply pill; background: var(--pill-warning-bg); color: var(--pill-warning-ink); }
+
+  .field-label { @apply block text-body font-medium text-ink mb-2; }
+  .input {
+    @apply w-full h-10 px-3 rounded-control bg-surface border border-control text-body text-ink placeholder:text-muted;
+    transition: border-color var(--t-hover) ease;
+  }
+  .input:focus { outline: none; border-color: var(--text); }
+
+  /* A loading value is a flat grey bar at its real size; no shimmer. */
+  .skeleton { @apply bg-raised rounded; }
+
+  /* Rendered answers (react-markdown): set for reading, in ink, on the ground. */
+  .markdown { @apply text-reading text-ink break-words; }
+  .markdown > * + * { margin-top: 12px; }
+  .markdown h1, .markdown h2, .markdown h3, .markdown h4 { @apply font-medium text-ink; margin-top: 20px; }
+  .markdown h1 { font-size: 18px; line-height: 26px; }
+  .markdown h2 { font-size: 16px; line-height: 24px; }
+  .markdown h3, .markdown h4 { font-size: 15px; line-height: 24px; }
+  .markdown > :first-child { margin-top: 0; }
+  .markdown strong { @apply font-medium text-ink; }
+  .markdown ul { @apply list-disc pl-5; }
+  .markdown ol { @apply list-decimal pl-5; }
+  .markdown li + li { margin-top: 4px; }
+  .markdown li > ul, .markdown li > ol { margin-top: 4px; }
+  .markdown a { @apply text-ink underline underline-offset-2 decoration-control hover:decoration-ink; }
+  .markdown code { @apply font-mono bg-raised rounded px-1 py-0.5 text-[0.86em]; }
+  .markdown pre { @apply font-mono bg-surface border border-line rounded-card p-3 overflow-x-auto text-[13px] leading-5; }
+  .markdown pre code { @apply bg-transparent p-0; }
+  .markdown blockquote { @apply pl-3 text-muted; border-left: 2px solid var(--control); }
+  .markdown table { @apply w-full text-body border-collapse block overflow-x-auto; }
+  .markdown th { @apply text-left font-normal text-muted px-3 py-2; border-bottom: 1px solid var(--border); }
+  .markdown td { @apply px-3 py-2 align-top; border-bottom: 1px solid var(--rule); }
+  .markdown hr { border: 0; border-top: 1px solid var(--border); }
+  /* Citation markers [n] in the hue: the answer's provenance is the one coloured thing on the screen. */
+  .cite-mark { @apply num font-medium text-hue no-underline; font-size: 0.86em; }
+  .markdown a.cite-mark { @apply text-hue no-underline; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
+}
+
+/* Shared-link visitors: host-only controls (runs, resets, uploads, ingest) are hidden; the API refuses them too. */
+body.visitor .host-only { display: none !important; }

@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-multipart
+pydantic-settings
+langchain-core
+langchain-groq
+langchain-openai
+langchain-google-genai
+langchain-text-splitters
+qdrant-client
+mmh3
+numpy
+pypdf
+python-docx
+voyageai
+pytest
