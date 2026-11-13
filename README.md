@@ -12,6 +12,8 @@ A portal that tests the correctness of the day7 Agentic-RAG system:
 5. **Metrics** for the base agent and each judge, plus judge-vs-judge agreement.
 6. **Human checker** reviews both judges side by side and gives the final verdict → `human.json`.
 
+
+**Results:** see [RESULTS.md](RESULTS.md) for the findings from the full run (both cases, all 50 questions).
 ## Test cases
 
 Both cases use day7's answer model, gpt-oss-120b, as the base; only the judges change. No judge is used twice,
